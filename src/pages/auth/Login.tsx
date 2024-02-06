@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router"
 import { Button } from "react-bootstrap"
 import useAuth from "../../Hooks/useAuth"
+import GoogleOAuth from "./GoogleOAuth"
 
 const Login = () => {
 	const navigate = useNavigate()
@@ -19,6 +20,8 @@ const Login = () => {
 			<Button variant="primary" onClick={() => onClick()}>
 				Login
 			</Button>
+			<h2>OR USE GOOGLE:</h2>
+			<GoogleOAuth />
 		</div>
 	)
 }
