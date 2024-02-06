@@ -8,7 +8,7 @@ const GoogleOAuth: React.FC = () => {
 	const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
 	const navigate = useNavigate()
 
-	// This is a shitty workaround ... fix this later and don't use "any" you lazy-ass!!
+	// Fix this later and don't use "any" you lazy-ass!!
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const onSuccess = async (credentialResponse: any) => {
 		try {

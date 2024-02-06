@@ -21,7 +21,9 @@ const Login = () => {
 				Login
 			</Button>
 			<h2>OR USE GOOGLE:</h2>
-			<GoogleOAuth />
+			<div className="google-login d-flex justify-content-center align-items-center">
+				<GoogleOAuth/>
+			</div>
 		</div>
 	)
 }
