@@ -4,12 +4,12 @@ import { loggedInLinks, loggedOutLinks } from "../../pages/navigation/navLinks"
 
 const Navigation = () => {
 	const { persist } = useAuth()
-  
+
 	let links
 	if (persist) {
 		links = loggedInLinks.map((link) => {
 			return (
-				<Nav>
+				<Nav key={link.name}>
 					<Nav.Item>
 						<Nav.Link href={link.path}>{`${link.name} ${link.icon}`}</Nav.Link>
 					</Nav.Item>
@@ -19,7 +19,7 @@ const Navigation = () => {
 	} else {
 		links = loggedOutLinks.map((link) => {
 			return (
-				<Nav>
+				<Nav key={link.name}>
 					<Nav.Item>
 						<Nav.Link href={link.path}>{`${link.name} ${link.icon}`}</Nav.Link>
 					</Nav.Item>

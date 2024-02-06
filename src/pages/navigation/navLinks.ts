@@ -25,7 +25,7 @@ export const loggedOutLinks = [
 export const loggedInLinks = [
 	{
 		name: "Home",
-		path: "/user-home",
+		path: "/",
 		icon: "🏠",
 	},
 	{
