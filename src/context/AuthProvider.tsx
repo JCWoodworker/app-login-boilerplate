@@ -47,6 +47,9 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 		console.log(`Getting user and access token from local storage: {"${user}", "${accessToken}"}`)
 		if (user && accessToken) {
 			setAuth({ user: user, accessToken: accessToken })
+		} else {
+			localStorage.removeItem("user")
+			localStorage.removeItem("accessToken")
 		}
 	}, [])
 
