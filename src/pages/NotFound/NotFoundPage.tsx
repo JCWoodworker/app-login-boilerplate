@@ -1,10 +1,23 @@
-const NotFoundPage = () => {
+import { useEffect } from "react"
+import { useNavigate } from "react-router"
 
-  return (
-    <div>
-      <h1>Not Found</h1>
-    </div>
-  )
+const NotFoundPage = () => {
+	const navigate = useNavigate()
+
+	const navigateHome = () => {
+		navigate("/")
+	}
+
+	useEffect(() => {
+		setTimeout(navigateHome, 1500)
+	})
+
+	return (
+		<div>
+			<h1>Not Found</h1>
+			<p>Auto-navigating home in a second</p>
+		</div>
+	)
 }
 
 export default NotFoundPage
