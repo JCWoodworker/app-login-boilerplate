@@ -6,6 +6,8 @@ const Logout = () => {
   const navigate = useNavigate()
   const { setAuth, setPersist } = useAuth()
   const onClick = () => {
+    localStorage.removeItem("user")
+    localStorage.removeItem("accessToken")
     setAuth({ user: "", accessToken: "" })
     setPersist(false)
     navigate("/")

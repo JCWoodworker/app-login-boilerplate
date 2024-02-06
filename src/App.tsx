@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom"
+import useAuth from "./Hooks/useAuth"
 
 import Navigation from "./pages/navigation/Navigation"
 import Home from "./pages/Home/Home"
@@ -8,8 +9,6 @@ import Logout from "./pages/auth/Logout"
 import NotFoundPage from "./pages/NotFound/NotFoundPage"
 
 import UserHome from "./pages/UserPages/UserHome"
-
-import useAuth from "./Hooks/useAuth"
 
 function App() {
 	const { persist } = useAuth()

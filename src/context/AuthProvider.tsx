@@ -33,13 +33,6 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 	const [persist, setPersist] = useState(initialPersistState)
 
 	useEffect(() => {
-		// This block is for testing purposes
-		if (persist) {
-			const user = localStorage.getItem("user")
-			const accessToken = localStorage.getItem("accessToken")
-			setAuth({ user: user || "", accessToken: accessToken || "" })
-		}
-		// End test block
 		localStorage.setItem("persistUser", JSON.stringify(persist))
 		console.log(`persist? ${persist}`)
 	}, [persist])
@@ -47,6 +40,14 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 	useEffect(() => {
 		console.log(`auth: ${JSON.stringify(auth)}`)
 	}, [auth])
+
+	useEffect(() => {
+		const user = localStorage.getItem("user")
+		const accessToken = localStorage.getItem("accessToken")
+		if (user && accessToken) {
+			setAuth({ user: user, accessToken: accessToken })
+		}
+	}, [])
 
 	return (
 		<AuthContext.Provider value={{ auth, setAuth, persist, setPersist }}>

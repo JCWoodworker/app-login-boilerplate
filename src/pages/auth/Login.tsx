@@ -6,6 +6,8 @@ const Login = () => {
 	const navigate = useNavigate()
 	const { setAuth, setPersist } = useAuth()
 	const onClick = () => {
+		localStorage.setItem("user", "testUser")
+		localStorage.setItem("accessToken", "testAccessToken")
 		setAuth({ user: "testUser", accessToken: "testAccessToken" })
 		setPersist(true)
 		navigate("/")
