@@ -44,6 +44,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 	useEffect(() => {
 		const user = localStorage.getItem("user")
 		const accessToken = localStorage.getItem("accessToken")
+		console.log(`Getting user and access token from local storage: {"${user}", "${accessToken}"}`)
 		if (user && accessToken) {
 			setAuth({ user: user, accessToken: accessToken })
 		}
