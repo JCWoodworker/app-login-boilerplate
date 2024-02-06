@@ -28,7 +28,11 @@ const Navigation = () => {
 		})
 	}
 
-	return <div>{links}</div>
+	return (
+		<div className="top-nav d-flex flex-row justify-content-center align-items-center">
+			{links}
+		</div>
+	)
 }
 
 export default Navigation
