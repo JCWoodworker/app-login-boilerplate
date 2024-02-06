@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom"
-import { Nav } from "react-bootstrap"
 
+import Navigation from "./pages/navigation/Navigation"
 import Home from "./pages/Home/Home"
 import Login from "./pages/auth/Login"
 import SignUp from "./pages/auth/Signup"
@@ -18,18 +18,7 @@ function App() {
 		<>
 			{!persist ? (
 				<>
-					<Nav>
-						<Nav.Item>
-							<Nav.Link href="/">Home</Nav.Link>
-						</Nav.Item>
-						<Nav.Item>
-							<Nav.Link href="/login">Login</Nav.Link>
-						</Nav.Item>
-						<Nav.Item>
-							<Nav.Link href="/signup">Signup</Nav.Link>
-						</Nav.Item>
-					</Nav>
-
+					<Navigation />
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/login" element={<Login />} />
@@ -39,15 +28,7 @@ function App() {
 				</>
 			) : (
 				<>
-					<Nav>
-						<Nav.Item>
-							<Nav.Link href="/">Home</Nav.Link>
-						</Nav.Item>
-						<Nav.Item>
-							<Nav.Link href="/logout">Logout</Nav.Link>
-						</Nav.Item>
-					</Nav>
-
+					<Navigation />
 					<Routes>
 						<Route path="/" element={<UserHome />} />
 						<Route path="/logout" element={<Logout />} />
