@@ -33,7 +33,15 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 	const [persist, setPersist] = useState(initialPersistState)
 
 	useEffect(() => {
+		// This block is for testing purposes
+		if (persist) {
+			const user = localStorage.getItem("user")
+			const accessToken = localStorage.getItem("accessToken")
+			setAuth({ user: user || "", accessToken: accessToken || "" })
+		}
+		// End test block
 		localStorage.setItem("persistUser", JSON.stringify(persist))
+		console.log(`persist? ${persist}`)
 	}, [persist])
 
 	useEffect(() => {

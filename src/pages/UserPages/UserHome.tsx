@@ -1,10 +1,14 @@
-const UserHome = () => {
+import useAuth from "../../Hooks/useAuth"
 
-  return (
-    <div>
-      <h1>User Home</h1>
-    </div>
-  )
+const UserHome = () => {
+	const { auth } = useAuth()
+
+	return (
+		<div>
+			<h1>User Home</h1>
+      <p>{`Welcome ${auth?.user}`}</p>
+		</div>
+	)
 }
 
-export default UserHome 
+export default UserHome
