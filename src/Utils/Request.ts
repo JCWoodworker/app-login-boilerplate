@@ -1,6 +1,6 @@
 import axios from "axios"
 
-interface SignInSignUpDto {
+interface SignUpAndLoginDto {
 	email: string
 	password: string
 }
@@ -14,12 +14,12 @@ export class Request {
 
 	static async get(
 		urlEndpoint: string,
-		authorization: boolean,
-		accessToken: string
+		authorizationRequired: boolean,
+		accessToken?: string
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	): Promise<any> {
 		let headers = {}
-		if (authorization) {
+		if (authorizationRequired) {
 			headers = {
 				Authorization: `Bearer ${accessToken}`,
 			}
@@ -30,15 +30,15 @@ export class Request {
 			const response = await axios.get(fullUrl, { headers })
 			return response.data
 		} catch (error) {
-			console.error("Request error:", error)
+			console.error("GET request error:", error)
 			throw error
 		}
 	}
 
 	static async post(
 		urlEndpoint: string,
-		data: SignInSignUpDto | GoogleOAuthDto | FormData,
-		authorization: boolean,
+		data: SignUpAndLoginDto | GoogleOAuthDto | FormData,
+		authorizationRequired: boolean,
 		accessToken?: string
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	): Promise<any> {
@@ -48,14 +48,14 @@ export class Request {
 		if (data instanceof File) {
 			headers = { ...headers, "Content-Type": "multipart/form-data" }
 		}
-		if (authorization) {
+		if (authorizationRequired) {
 			headers = { ...headers, Authorization: `Bearer ${accessToken}` }
 		}
 		try {
 			const response = await axios.post(fullUrl, data, { headers })
 			return response.data
 		} catch (error) {
-			console.error("Request error:", error)
+			console.error("POST request error:", error)
 			throw error
 		}
 	}
@@ -75,12 +75,17 @@ export class Request {
 			const response = await axios.post(
 				`${urlPrefix}/authentication/refresh-tokens`,
 				{ refreshToken }
-				// { headers: { withCredentials: true } }
+				/*
+				We'll need the following headers once refresh tokens are in HTTP only cookies:
+				{ headers: { withCredentials: true } }
+				*/
 			)
 
 			if (response.status === 401) {
 				localStorage.removeItem("refreshToken")
-				console.log("401 Unauthorized, removing token from local storage")
+				console.log(
+					"401 Unauthorized, removing token from local storage - it can only be used once"
+				)
 				return false
 			}
 

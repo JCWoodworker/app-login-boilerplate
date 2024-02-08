@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react"
+import { useNavigate } from "react-router"
 import { Request } from "../Utils/Request"
 
 interface Props {
@@ -25,6 +26,7 @@ const AuthContext = createContext<AuthContext>({
 })
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
+	const navigate = useNavigate()
 	const persistedData = localStorage.getItem("persistUser")
 	const initialPersistState = persistedData ? JSON.parse(persistedData) : false
 	const [auth, setAuth] = useState<AuthInterface>({
@@ -47,9 +49,24 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 		if (refreshToken) {
 			Request.refresh().then((response) => {
 				if (response.status === 200) {
-					setAuth({ user: "GOOGLE-USER-REFRESH" || "", accessToken: authToken || "" })
+					setAuth({
+						user: "GOOGLE-USER-REFRESH" || "",
+						accessToken: authToken || "",
+					})
+				} else if (response.status === 401) {
+					localStorage.removeItem("user")
+					localStorage.removeItem("accessToken")
+					localStorage.removeItem("refreshToken")
+					localStorage.setItem("persistUser", "false")
+					navigate("/")
 				}
 			})
+		} else if (persist &&!refreshToken) {
+			localStorage.removeItem("user")
+			localStorage.removeItem("accessToken")
+			localStorage.removeItem("refreshToken")
+			localStorage.setItem("persistUser", "false")
+			navigate("/")
 		}
 	}, [])
 
