@@ -29,7 +29,7 @@ const Navigation = () => {
 	}
 
 	return (
-		<div className="top-nav d-flex flex-row justify-content-center align-items-center">
+		<div className="top-nav p-2 d-flex flex-row justify-content-center align-items-center border-bottom">
 			{links}
 		</div>
 	)

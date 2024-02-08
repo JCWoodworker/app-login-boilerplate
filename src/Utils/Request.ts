@@ -1,11 +1,11 @@
 import axios from "axios"
 
-export interface SignInSignUpDto {
+interface SignInSignUpDto {
 	email: string
 	password: string
 }
 
-export interface GoogleOAuthDto {
+interface GoogleOAuthDto {
 	token: string
 }
 
@@ -37,10 +37,7 @@ export class Request {
 
 	static async post(
 		urlEndpoint: string,
-		data:
-			| SignInSignUpDto
-			| GoogleOAuthDto
-			| FormData,
+		data: SignInSignUpDto | GoogleOAuthDto | FormData,
 		authorization: boolean,
 		accessToken?: string
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,17 +77,19 @@ export class Request {
 				{ refreshToken }
 				// { headers: { withCredentials: true } }
 			)
+
 			if (response.status === 401) {
 				localStorage.removeItem("refreshToken")
 				console.log("401 Unauthorized, removing token from local storage")
 				return false
 			}
+
+			localStorage.setItem("refreshToken", response.data.refreshToken)
 			return response.data
-			
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
 			if (error.response.status === 401) {
-				localStorage.removeItem("refreshToken")
 				console.log("401 Unauthorized, removing token from local storage")
 				localStorage.removeItem("refreshToken")
 				localStorage.setItem("persist", "false")

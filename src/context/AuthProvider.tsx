@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react"
+import { Request } from "../Utils/Request"
 
 interface Props {
 	children: JSX.Element
@@ -39,8 +40,16 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 	useEffect(() => {
 		const user = localStorage.getItem("user")
 		const authToken = localStorage.getItem("accessToken")
+		const refreshToken = localStorage.getItem("refreshToken")
 		if (user !== "" && authToken !== "") {
 			setAuth({ user: user || "", accessToken: authToken || "" })
+		}
+		if (refreshToken) {
+			Request.refresh().then((response) => {
+				if (response.status === 200) {
+					setAuth({ user: "GOOGLE-USER-REFRESH" || "", accessToken: authToken || "" })
+				}
+			})
 		}
 	}, [])
 

@@ -4,7 +4,7 @@ import useAuth from "./Hooks/useAuth"
 import Navigation from "./pages/navigation/Navigation"
 import Home from "./pages/Home/Home"
 import Login from "./pages/auth/Login"
-import SignUp from "./pages/auth/Signup"
+// import SignUp from "./pages/auth/Signup"
 import Logout from "./pages/auth/Logout"
 import NotFoundPage from "./pages/NotFound/NotFoundPage"
 
@@ -21,7 +21,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/login" element={<Login />} />
-						<Route path="/signup" element={<SignUp />} />
+						{/* <Route path="/signup" element={<SignUp />} /> */}
 						<Route path="*" element={<NotFoundPage />} />
 					</Routes>
 				</>

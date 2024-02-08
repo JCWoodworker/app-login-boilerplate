@@ -1,7 +1,7 @@
 const Home = () => {
 
   return (
-    <div>
+		<div className="google-oauth mt-2 p-4 d-flex flex-column justify-content-center align-items-center gap-4">
       <h1>Home</h1>
     </div>
   )

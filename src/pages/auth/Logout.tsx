@@ -15,7 +15,7 @@ const Logout = () => {
 
 
   return (
-    <div>
+		<div className="google-oauth mt-2 p-4 d-flex flex-column justify-content-center align-items-center gap-4">
       <h1>Logout</h1>
       <Button
 				variant="primary"
