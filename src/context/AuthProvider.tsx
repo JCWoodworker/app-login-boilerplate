@@ -68,6 +68,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 			localStorage.setItem("persistUser", "false")
 			navigate("/")
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return (
