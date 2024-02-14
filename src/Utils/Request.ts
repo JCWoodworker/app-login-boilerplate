@@ -5,7 +5,7 @@ interface SignUpAndLoginDto {
 	password: string
 }
 
-interface GoogleOAuthDto {
+export interface GoogleOAuthDto {
 	token: string
 }
 
